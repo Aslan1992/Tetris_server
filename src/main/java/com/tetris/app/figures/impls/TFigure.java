@@ -1,6 +1,7 @@
 package com.tetris.app.figures.impls;
 
 import com.tetris.app.Container;
+import com.tetris.app.exceptions.FigureInitException;
 import com.tetris.app.figures.Block;
 import com.tetris.app.figures.Figure;
 import com.tetris.app.figures.SpacePose;
@@ -27,7 +28,7 @@ public class TFigure implements Figure {
     }
 
     @Override
-    public void init(int y, int x, SpacePose spacePose) {
+    public void init(int y, int x, SpacePose spacePose) throws FigureInitException {
         this.y = y;
         this.x = x;
         this.spacePose = spacePose;
@@ -37,6 +38,8 @@ public class TFigure implements Figure {
 
         if (actionApprover.putBlocksPossible() && actionApprover.figureInsideOfContainer()) {
             blocks = figureBuilder.build(y, x, spacePose);
+        } else {
+            throw new FigureInitException("Cannot init figure at y=" + y + ", x=" + x);
         }
     }
 
@@ -69,6 +72,8 @@ public class TFigure implements Figure {
         if (actionApprover.turnAroundPossible()) {
             spacePose = SpacePose.getNext(spacePose);
             blocks = figureBuilder.build(y, x, spacePose);
+        } else {
+            System.out.println("Turn around is not possible!");
         }
     }
 
@@ -92,4 +97,8 @@ public class TFigure implements Figure {
         return blocks;
     }
 
+    @Override
+    public boolean moveForwardPossible() {
+        return actionApprover.moveForwardPossible();
+    }
 }

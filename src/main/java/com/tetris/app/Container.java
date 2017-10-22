@@ -35,14 +35,15 @@ public class Container {
     }
 
     public void print() {
+        System.out.println("-----------------------");
         for(int i = 0; i < DIMENSION; i++) {
             for(int j = 0; j < DIMENSION; j++) {
-                System.out.print(currentState[i][j] == null ? "[ ]" : "[b]");
+                System.out.print(currentState[i][j] == null ? "[ ]" : "[*]");
                 System.out.print(" ");
             }
             System.out.println();
         }
-        System.out.println("end -----------------------");
+        System.out.println("-----------------------");
     }
 
     private void clear() {

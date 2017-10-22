@@ -55,4 +55,9 @@ public class BlockFigure implements Figure {
     public void turnAround() {
 
     }
+
+    @Override
+    public boolean moveForwardPossible() {
+        return false;
+    }
 }
