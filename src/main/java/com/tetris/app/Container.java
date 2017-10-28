@@ -34,6 +34,16 @@ public class Container {
         }
     }
 
+    public String[][] getStateAsStringArray() {
+        String[][] result = new String[DIMENSION][DIMENSION];
+        for(int i = 0; i < DIMENSION; i++) {
+            for(int j = 0; j < DIMENSION; j++) {
+                result[i][j] = currentState[i][j] == null ? "[ ]" : "[*]";
+            }
+        }
+        return result;
+    }
+
     public void print() {
         System.out.println("-----------------------");
         for(int i = 0; i < DIMENSION; i++) {
