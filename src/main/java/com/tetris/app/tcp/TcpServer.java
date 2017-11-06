@@ -2,6 +2,7 @@ package com.tetris.app.tcp;
 
 import com.tetris.app.util.Encoder;
 
+import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.InetAddress;
@@ -15,6 +16,7 @@ public class TcpServer {
     private ServerSocket serverSocket;
     private Socket client;
     private DataOutputStream writer = null;
+    private DataInputStream reader = null;
     private Encoder encoder;
     private boolean clientConnected = false;
 
@@ -29,6 +31,7 @@ public class TcpServer {
         System.out.println("Client connected..");
         clientConnected = true;
         writer = new DataOutputStream(client.getOutputStream());
+        reader = new DataInputStream(client.getInputStream());
         encoder = new Encoder();
     }
 
@@ -46,4 +49,17 @@ public class TcpServer {
         writer.write(msg.getBytes());
     }
 
+    public void closeConnection() throws IOException {
+        serverSocket.close();
+    }
+
+    public int receive() throws IOException {
+        byte[] buffer = new byte[1];
+        int bytes = reader.read(buffer);
+        if (bytes > 0) {
+           String code = new String(buffer);
+           return Integer.parseInt(code);
+        }
+        return 0;
+    }
 }

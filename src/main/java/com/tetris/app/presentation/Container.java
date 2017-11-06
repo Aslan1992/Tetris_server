@@ -1,4 +1,4 @@
-package com.tetris.app;
+package com.tetris.app.presentation;
 
 import com.tetris.app.figures.Block;
 import com.tetris.app.figures.Figure;
@@ -28,7 +28,7 @@ public class Container {
     public void represent() {
         clear();
         for (Figure figure : figures) {
-            for(Block block : figure.getBlocks()) {
+            for (Block block : figure.getBlocks()) {
                 currentState[block.getY()][block.getX()] = block;
             }
         }
@@ -36,8 +36,8 @@ public class Container {
 
     public String[][] getStateAsStringArray() {
         String[][] result = new String[DIMENSION][DIMENSION];
-        for(int i = 0; i < DIMENSION; i++) {
-            for(int j = 0; j < DIMENSION; j++) {
+        for (int i = 0; i < DIMENSION; i++) {
+            for (int j = 0; j < DIMENSION; j++) {
                 result[i][j] = currentState[i][j] == null ? "[ ]" : "[*]";
             }
         }
@@ -45,20 +45,19 @@ public class Container {
     }
 
     public void print() {
-        System.out.println("-----------------------");
-        for(int i = 0; i < DIMENSION; i++) {
-            for(int j = 0; j < DIMENSION; j++) {
-                System.out.print(currentState[i][j] == null ? "[ ]" : "[*]");
-                System.out.print(" ");
+        String[][] state = getStateAsStringArray();
+        System.out.println("---^---");
+        for (int i = 0; i < DIMENSION; i++) {
+            for (int j = 0; j < DIMENSION; j++) {
+                System.out.print(state[i][j]);
             }
             System.out.println();
         }
-        System.out.println("-----------------------");
     }
 
     private void clear() {
-        for(int i = 0; i < DIMENSION; i++) {
-            for(int j = 0; j < DIMENSION; j++) {
+        for (int i = 0; i < DIMENSION; i++) {
+            for (int j = 0; j < DIMENSION; j++) {
                 currentState[i][j] = null;
             }
         }

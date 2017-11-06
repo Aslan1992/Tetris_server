@@ -1,6 +1,6 @@
 package com.tetris.app.util;
 
-import com.tetris.app.Container;
+import com.tetris.app.presentation.Container;
 
 public class Encoder {
 

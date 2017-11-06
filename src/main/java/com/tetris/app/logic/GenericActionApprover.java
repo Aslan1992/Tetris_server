@@ -1,6 +1,6 @@
 package com.tetris.app.logic;
 
-import com.tetris.app.Container;
+import com.tetris.app.presentation.Container;
 import com.tetris.app.figures.Block;
 import com.tetris.app.figures.Figure;
 
