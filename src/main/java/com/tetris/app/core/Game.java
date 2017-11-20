@@ -1,10 +1,9 @@
-package com.tetris.app;
+package com.tetris.app.core;
 
 import com.tetris.app.exceptions.FigureInitException;
 import com.tetris.app.figures.Figure;
 import com.tetris.app.figures.SpacePose;
 import com.tetris.app.figures.impls.TFigure;
-import com.tetris.app.logic.Player;
 import com.tetris.app.presentation.Container;
 import com.tetris.app.tcp.TcpServer;
 
@@ -13,12 +12,12 @@ import java.io.IOException;
 public class Game {
     private TcpServer server;
     private Container container;
-    private Player player;
+    private FigureMover figureMover;
 
     public Game() throws IOException {
         server = new TcpServer();
         container = new Container();
-        player = new Player();
+        figureMover = new FigureMover(server, container);
     }
 
     public void run() throws IOException, InterruptedException {
@@ -35,16 +34,16 @@ public class Game {
                 }
                 container.addFigure(figure);
                 container.represent();
-                container.print();
-                player.accept(figure);
+                figureMover.setFigure(figure);
+
+                //Параллельный поток чтобы реагировать на комманды игрока и мгновенно двигать фигуру на клиенте (без заддержек)
+                new Thread(figureMover).start();
+
                 while (figure.moveForwardPossible()) {
-                    int code = server.receive();
-                    player.doAction(code);
-                    String[][] state = container.getStateAsStringArray();
+                    figure.moveForward();
                     container.represent();
-                    server.send(state);
-                    container.print();
-                    Thread.sleep(800);
+                    server.send(container.getStateAsStringArray());
+                    Thread.sleep(850);
                 }
             }
             //means nothing

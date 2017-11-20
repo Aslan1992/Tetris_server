@@ -45,14 +45,6 @@ public class TcpServer {
         return clientConnected;
     }
 
-    public void sendMessageToClient(String msg) throws IOException {
-        writer.write(msg.getBytes());
-    }
-
-    public void closeConnection() throws IOException {
-        serverSocket.close();
-    }
-
     public int receive() throws IOException {
         byte[] buffer = new byte[1];
         if (reader.available() > 0) {

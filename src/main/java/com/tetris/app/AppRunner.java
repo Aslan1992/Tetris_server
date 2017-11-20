@@ -1,5 +1,7 @@
 package com.tetris.app;
 
+import com.tetris.app.core.Game;
+
 import java.io.IOException;
 
 public class AppRunner {
