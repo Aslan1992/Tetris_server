@@ -12,6 +12,7 @@ public class Player {
 
     public void doAction(int code) {
         switch (code) {
+            case 0:
             case 1:
                 figure.moveForward();
                 break;

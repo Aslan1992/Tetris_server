@@ -55,10 +55,12 @@ public class TcpServer {
 
     public int receive() throws IOException {
         byte[] buffer = new byte[1];
-        int bytes = reader.read(buffer);
-        if (bytes > 0) {
-           String code = new String(buffer);
-           return Integer.parseInt(code);
+        if (reader.available() > 0) {
+            int bytes = reader.read(buffer);
+            if (bytes > 0) {
+                String code = new String(buffer);
+                return Integer.parseInt(code);
+            }
         }
         return 0;
     }

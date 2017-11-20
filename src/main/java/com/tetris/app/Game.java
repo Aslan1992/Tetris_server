@@ -22,34 +22,31 @@ public class Game {
     }
 
     public void run() throws IOException, InterruptedException {
-//        server.start();
+        server.start();
         while (true) {
-//            if(server.isClientConnected()) {
-            Figure figure = new TFigure(container);
-            try {
-                figure.init(1, 4, SpacePose.FIRST);
-            } catch (FigureInitException e) {
-                //handle it
-                System.err.println("Cannot init at " + figure.getY() + "," + figure.getX());
-                System.exit(0);
-            }
-            container.addFigure(figure);
-            container.represent();
-            container.print();
-            player.accept(figure);
-            while (figure.moveForwardPossible()) {
-                int code = server.receive();
-                player.doAction(code);
-                // String[][] state = container.getStateAsStringArray();
-//            server.send(state);
-//                Thread.sleep(500);
-
-                figure.moveForward();
+            if (server.isClientConnected()) {
+                Figure figure = new TFigure(container);
+                try {
+                    figure.init(1, 4, SpacePose.FIRST);
+                } catch (FigureInitException e) {
+                    //handle it
+                    System.err.println("Cannot init at " + figure.getY() + "," + figure.getX());
+                    System.exit(0);
+                }
+                container.addFigure(figure);
                 container.represent();
                 container.print();
-
+                player.accept(figure);
+                while (figure.moveForwardPossible()) {
+                    int code = server.receive();
+                    player.doAction(code);
+                    String[][] state = container.getStateAsStringArray();
+                    container.represent();
+                    server.send(state);
+                    container.print();
+                    Thread.sleep(800);
+                }
             }
-//            }
             //means nothing
             //To avoid warning from IDE that loop is endless
             if (1 != 1) break;
