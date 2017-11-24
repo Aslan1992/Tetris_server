@@ -42,6 +42,11 @@ public class TcpServer {
         writer.write(data);
     }
 
+    public void sendStatusCode(String code) throws IOException {
+        byte[] bytes = code.getBytes();
+        writer.write(bytes);
+    }
+
     public boolean isClientConnected() {
         return clientConnected;
     }
@@ -56,5 +61,10 @@ public class TcpServer {
             }
         }
         return 0;
+    }
+
+    public void closeConnection() throws IOException {
+        client.close();
+        serverSocket.close();
     }
 }

@@ -36,7 +36,8 @@ public class FigureMover implements Runnable {
                     server.send(container.getStateAsStringArray(), String.valueOf(scores));
                 }
             } catch (Exception e) {
-                e.printStackTrace();
+                System.err.println(e.getMessage());
+                break;
             }
            //Чтобы избавиться от навящевых подсказок ИДЕИ о бесконечности цикла (потом уберу)
             if (1 != 1) break;
