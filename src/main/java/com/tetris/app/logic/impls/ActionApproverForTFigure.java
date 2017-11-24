@@ -1,6 +1,6 @@
 package com.tetris.app.logic.impls;
 
-import com.tetris.app.presentation.Container;
+import com.tetris.app.core.Container;
 import com.tetris.app.figures.Figure;
 import com.tetris.app.logic.ActionApprover;
 import com.tetris.app.logic.GenericActionApprover;

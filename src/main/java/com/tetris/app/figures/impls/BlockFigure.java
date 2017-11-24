@@ -57,6 +57,11 @@ public class BlockFigure implements Figure {
     }
 
     @Override
+    public void removeBlock(int y, int x) {
+
+    }
+
+    @Override
     public boolean moveForwardPossible() {
         return false;
     }

@@ -6,7 +6,7 @@ import com.tetris.app.figures.Figure;
 import com.tetris.app.figures.SpacePose;
 import com.tetris.app.figures.impls.BlockFigure;
 import com.tetris.app.figures.impls.TFigure;
-import com.tetris.app.presentation.Container;
+import com.tetris.app.core.Container;
 import org.junit.Test;
 
 import static org.junit.Assert.assertNull;

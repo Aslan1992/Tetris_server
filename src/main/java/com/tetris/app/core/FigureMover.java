@@ -1,7 +1,6 @@
 package com.tetris.app.core;
 
 import com.tetris.app.figures.Figure;
-import com.tetris.app.presentation.Container;
 import com.tetris.app.tcp.TcpServer;
 
 // Класс отвечающий за манипулицию фигурой
@@ -10,6 +9,7 @@ public class FigureMover implements Runnable {
     private TcpServer server;
     private Container container;
     private Figure figure;
+    private int scores;
 
     public FigureMover(TcpServer server, Container container) {
         this.server = server;
@@ -20,21 +20,25 @@ public class FigureMover implements Runnable {
         this.figure = figure;
     }
 
+    public void setScores(int scores) {
+        this.scores = scores;
+    }
+
     @Override
     public void run() {
         while (true) {
             int commandCode;
             try {
                 commandCode = server.receive();
-                move(commandCode);
-                container.represent();
-                server.send(container.getStateAsStringArray());
-                Thread.sleep(500);
+                if (commandCode != 0) {
+                    move(commandCode);
+                    container.represent();
+                    server.send(container.getStateAsStringArray(), String.valueOf(scores));
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            //means nothing
-            //To avoid warning from IDE that loop is endless
+           //Чтобы избавиться от навящевых подсказок ИДЕИ о бесконечности цикла (потом уберу)
             if (1 != 1) break;
         }
     }

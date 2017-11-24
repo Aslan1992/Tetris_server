@@ -1,6 +1,6 @@
 package com.tetris.app.figures.impls;
 
-import com.tetris.app.presentation.Container;
+import com.tetris.app.core.Container;
 import com.tetris.app.exceptions.FigureInitException;
 import com.tetris.app.figures.Block;
 import com.tetris.app.figures.Figure;
@@ -41,6 +41,11 @@ public class TFigure implements Figure {
         } else {
             throw new FigureInitException("Cannot init figure at y=" + y + ", x=" + x);
         }
+    }
+
+    @Override
+    public void removeBlock(int i, int j) {
+        blocks.removeIf(block -> block.getY() == i && block.getX() == j);
     }
 
     @Override

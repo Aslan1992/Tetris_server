@@ -35,8 +35,9 @@ public class TcpServer {
         encoder = new Encoder();
     }
 
-    public void send(String[][] array) throws IOException {
+    public void send(String[][] array, String scores) throws IOException {
         String encodedLine = encoder.encode(array);
+        encodedLine = encodedLine.concat("Total scores: ").concat(scores);
         byte[] data = encodedLine.getBytes();
         writer.write(data);
     }

@@ -12,6 +12,7 @@ public interface Figure {
     int getY();
     int getX();
     void init(int y, int x, SpacePose spacePose) throws FigureInitException;
+    void removeBlock(int y, int x);
     void moveForward();
     void moveRight();
     void moveLeft();
@@ -19,5 +20,4 @@ public interface Figure {
     void turnAround();
 
     boolean moveForwardPossible();
-
 }
