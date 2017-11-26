@@ -1,4 +1,4 @@
-package com.tetris.app.logic.impls;
+package com.tetris.app.logic.impls.builders;
 
 import com.tetris.app.figures.Block;
 import com.tetris.app.figures.SpacePose;

@@ -3,7 +3,6 @@ package com.tetris.app.core;
 import com.tetris.app.exceptions.FigureInitException;
 import com.tetris.app.figures.Figure;
 import com.tetris.app.figures.SpacePose;
-import com.tetris.app.figures.impls.TFigure;
 import com.tetris.app.tcp.TcpServer;
 
 import java.io.IOException;
@@ -13,23 +12,23 @@ public class Game {
     private TcpServer server;
     private Container container;
     private FigureMover figureMover;
+    private FigureCreator creator;
     private int scores;
 
     public void run() throws IOException, InterruptedException {
 
         server = new TcpServer();
         container = new Container();
+        creator = new FigureCreator(container);
         figureMover = new FigureMover(server, container);
 
         server.start();
         while (true) {
             if (server.isClientConnected()) {
                 int removed = container.removeFullFilledLines();
-
                 //очки за горизонтальную линии
                 scores += removed * 100;
-
-                Figure figure = new TFigure(container);
+                Figure figure = creator.createAny();
                 try {
                     //Инициализирую фигуру где-то по середине полотна
                     figure.init(1, 4, SpacePose.FIRST);
@@ -47,7 +46,6 @@ public class Game {
                 figureMover.setScores(scores);
                 //Параллельный поток чтобы реагировать на команды игрока и мгновенно двигать фигуру на клиенте (без заддержек)
                 new Thread(figureMover).start();
-
                 while (figure.moveForwardPossible()) {
                     figure.moveForward();
                     container.represent();
@@ -55,7 +53,6 @@ public class Game {
                     Thread.sleep(850);
                 }
             }
-            //means nothing
             //To avoid warning from IDE that loop is endless
             if (1 == 2) break;
         }

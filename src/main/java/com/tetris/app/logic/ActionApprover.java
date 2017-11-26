@@ -5,6 +5,6 @@ public interface ActionApprover {
     boolean moveLeftPossible();
     boolean moveRightPossible();
     boolean putBlocksPossible();
-    boolean figureInsideOfContainer();
+    boolean figureInsideOfArea();
     boolean turnAroundPossible();
 }

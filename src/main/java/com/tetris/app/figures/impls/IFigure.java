@@ -7,22 +7,22 @@ import com.tetris.app.figures.Figure;
 import com.tetris.app.figures.SpacePose;
 import com.tetris.app.logic.ActionApprover;
 import com.tetris.app.logic.FigureBuilder;
-import com.tetris.app.logic.impls.approvers.ActionApproverForTFigure;
-import com.tetris.app.logic.impls.builders.TFigureBuilder;
+import com.tetris.app.logic.impls.approvers.ActionApproverForIFigure;
+import com.tetris.app.logic.impls.builders.IFigureBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class TFigure implements Figure {
+public class IFigure implements Figure {
     private int y;
     private int x;
     private List<Block> blocks;
     private Container container;
     private SpacePose spacePose;
     private ActionApprover actionApprover;
-    private FigureBuilder figureBuilder;
+    private FigureBuilder builder;
 
-    public TFigure(Container container) {
+    public IFigure(Container container) {
         this.container = container;
     }
 
@@ -32,14 +32,34 @@ public class TFigure implements Figure {
         this.x = x;
         this.spacePose = spacePose;
         blocks = new ArrayList<>();
-        actionApprover = new ActionApproverForTFigure(container, this);
-        figureBuilder = new TFigureBuilder();
+        actionApprover = new ActionApproverForIFigure(container, this);
+        builder = new IFigureBuilder();
 
-        if (actionApprover.putBlocksPossible() && actionApprover.figureInsideOfArea()) {
-            blocks = figureBuilder.build(y, x, spacePose);
+        if(actionApprover.putBlocksPossible() && actionApprover.figureInsideOfArea()) {
+            blocks = builder.build(y, x, spacePose);
         } else {
-            throw new FigureInitException("Cannot init TFigure at y=" + y + ", x=" + x);
+            throw new FigureInitException("Cannot init IFigure at y=" + y + ", x=" + x);
         }
+    }
+
+    @Override
+    public SpacePose getSpacePose() {
+        return spacePose;
+    }
+
+    @Override
+    public List<Block> getBlocks() {
+        return blocks;
+    }
+
+    @Override
+    public int getY() {
+        return y;
+    }
+
+    @Override
+    public int getX() {
+        return x;
     }
 
     @Override
@@ -49,10 +69,10 @@ public class TFigure implements Figure {
 
     @Override
     public void moveForward() {
-         if (actionApprover.moveForwardPossible()){
-             blocks.forEach(Block::moveForward);
-             y++;
-         }
+        if (actionApprover.moveForwardPossible()){
+            blocks.forEach(Block::moveForward);
+            y++;
+        }
     }
 
     @Override
@@ -74,31 +94,15 @@ public class TFigure implements Figure {
     @Override
     public void turnAround() {
         if (actionApprover.turnAroundPossible()) {
-            spacePose = SpacePose.getNext(spacePose);
-            blocks = figureBuilder.build(y, x, spacePose);
+            if (spacePose == SpacePose.FIRST) {
+                spacePose = SpacePose.SECOND;
+            } else if (spacePose == SpacePose.SECOND) {
+                spacePose = SpacePose.FIRST;
+            }
+            blocks = builder.build(y, x, spacePose);
         } else {
-            System.out.println("Could not turn around TFigure");
+            System.out.println("Could not turn around IFigure");
         }
-    }
-
-    @Override
-    public SpacePose getSpacePose() {
-        return spacePose;
-    }
-
-    @Override
-    public int getY() {
-        return y;
-    }
-
-    @Override
-    public int getX() {
-        return x;
-    }
-
-    @Override
-    public List<Block> getBlocks() {
-        return blocks;
     }
 
     @Override

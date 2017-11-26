@@ -1,4 +1,4 @@
-package com.tetris.app.logic.impls;
+package com.tetris.app.logic.impls.approvers;
 
 import com.tetris.app.core.Container;
 import com.tetris.app.figures.Figure;
@@ -76,7 +76,7 @@ public class ActionApproverForTFigure extends GenericActionApprover implements A
     }
 
     @Override
-    public boolean figureInsideOfContainer() {
+    public boolean figureInsideOfArea() {
         setYX(figure);
         switch (figure.getSpacePose()) {
             case FIRST:
