@@ -14,8 +14,13 @@ import com.tetris.app.logic.impls.builders.IFigureBuilder;
 import com.tetris.app.logic.impls.builders.LFigureBuilder;
 import com.tetris.app.logic.impls.builders.SFigureBuilder;
 import com.tetris.app.logic.impls.builders.TFigureBuilder;
+import com.tetris.app.util.RandomNumberGenerator;
 
 public class FigureGenerator {
+    private static final int ONE = 1;
+    private static final int TWO = 2;
+    private static final int THREE = 3;
+    private static final int FOUR = 4;
     private Container container;
 
     public FigureGenerator(Container container) {
@@ -23,30 +28,28 @@ public class FigureGenerator {
     }
 
     public Figure getRandomFigure() {
-        int num = 4;
+        int num = RandomNumberGenerator.generate(ONE, FOUR);
         ActionApprover actionApprover;
 
-        if (num == 1) {
+        if (num == ONE) {
             actionApprover = new ActionApproverForIFigure(container);
             IFigure iFigure = new IFigure(container, actionApprover, new IFigureBuilder());
             actionApprover.setFigure(iFigure);
-
             return iFigure;
 
-        } else if (num == 2) {
+        } else if (num == TWO) {
             actionApprover = new ActionApproverForTFigure(container);
             TFigure tFigure = new TFigure(container, actionApprover, new TFigureBuilder());
             actionApprover.setFigure(tFigure);
-
             return tFigure;
 
-        } else if (num == 3) {
+        } else if (num == THREE) {
             actionApprover = new ActionApproverForSFigure(container);
             SFigure sFigure = new SFigure(container, actionApprover, new SFigureBuilder());
             actionApprover.setFigure(sFigure);
-
             return sFigure;
-        } else if (num == 4) {
+
+        } else if (num == FOUR) {
             actionApprover = new ActionApproverForLFigure(container);
             LFigure lFigure = new LFigure(container, actionApprover, new LFigureBuilder());
             actionApprover.setFigure(lFigure);
