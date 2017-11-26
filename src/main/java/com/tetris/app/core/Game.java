@@ -12,23 +12,23 @@ public class Game {
     private TcpServer server;
     private Container container;
     private FigureMover figureMover;
-    private FigureCreator creator;
+    private FigureGenerator generator;
     private int scores;
 
     public void run() throws IOException, InterruptedException {
 
         server = new TcpServer();
         container = new Container();
-        creator = new FigureCreator(container);
+        generator = new FigureGenerator(container);
         figureMover = new FigureMover(server, container);
 
         server.start();
         while (true) {
             if (server.isClientConnected()) {
                 int removed = container.removeFullFilledLines();
-                //очки за горизонтальную линии
+                //scores for horizontal lines
                 scores += removed * 100;
-                Figure figure = creator.createAny();
+                Figure figure = generator.getRandomFigure();
                 try {
                     //Инициализирую фигуру где-то по середине полотна
                     figure.init(1, 4, SpacePose.FIRST);

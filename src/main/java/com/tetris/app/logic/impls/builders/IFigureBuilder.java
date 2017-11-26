@@ -14,10 +14,10 @@ public class IFigureBuilder implements FigureBuilder {
         switch (pose) {
             case FIRST:
                 return new ArrayList<>(Arrays.asList(
-                        new Block(y, x), new Block(y + 1, x), new Block(y + 2, x), new Block(y + 3, x)));
+                        new Block(y, x), new Block(y - 1, x), new Block(y + 1, x), new Block(y + 2, x)));
             case SECOND:
                 return new ArrayList<>(Arrays.asList(
-                        new Block(y, x), new Block(y, x + 1), new Block(y, x + 2), new Block(y, x + 3)));
+                        new Block(y, x), new Block(y, x - 1), new Block(y, x + 1), new Block(y, x + 2)));
         }
         return new ArrayList<>();
     }

@@ -26,7 +26,7 @@ public class TcpServer {
     }
 
     public void start() throws IOException {
-        System.out.println("Waiting for client connections..");
+        System.out.println("Waiting for .NET client connection..");
         client = serverSocket.accept();
         System.out.println("Client connected..");
         clientConnected = true;

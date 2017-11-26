@@ -26,4 +26,9 @@ public class GenericActionApprover {
         }
         return false;
     }
+
+    protected void setYX(Figure figure) {
+        this.y = figure.getY();
+        this.x = figure.getX();
+    }
 }

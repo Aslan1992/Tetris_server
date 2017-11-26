@@ -1,7 +1,6 @@
 package com.tetris.app.logic.impls.approvers;
 
 import com.tetris.app.core.Container;
-import com.tetris.app.figures.Figure;
 import com.tetris.app.logic.ActionApprover;
 import com.tetris.app.logic.GenericActionApprover;
 
@@ -105,10 +104,5 @@ public class ActionApproverForTFigure extends GenericActionApprover implements A
                 return validPoint(y - 1, x - 1) && validPoint(y, x - 1) && validPoint(y + 1, x + 1)  && validPoint(y - 1, x + 1);
         }
         return false;
-    }
-
-    private void setYX(Figure figure) {
-        this.y = figure.getY();
-        this.x = figure.getX();
     }
 }
