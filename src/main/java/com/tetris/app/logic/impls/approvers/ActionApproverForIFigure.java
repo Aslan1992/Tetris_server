@@ -7,8 +7,8 @@ import com.tetris.app.logic.GenericActionApprover;
 
 public class ActionApproverForIFigure extends GenericActionApprover implements ActionApprover {
 
-    public ActionApproverForIFigure(Container container, Figure figure) {
-        super(container, figure);
+    public ActionApproverForIFigure(Container container) {
+        super(container);
     }
 
     @Override

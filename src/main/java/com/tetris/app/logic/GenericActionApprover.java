@@ -11,8 +11,11 @@ public class GenericActionApprover {
     protected int y;
     protected int x;
 
-    public GenericActionApprover(Container container, Figure figure) {
+    public GenericActionApprover(Container container) {
         this.container = container;
+    }
+
+    public void setFigure(Figure figure) {
         this.figure = figure;
     }
 
