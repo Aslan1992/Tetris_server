@@ -63,9 +63,9 @@ public class ActionApproverForIFigure extends GenericActionApprover implements A
         setYX(figure);
         switch (figure.getSpacePose()) {
             case FIRST:
-                return y > 0 && y < Container.DIMENSION - 2 && x >= 0 && x < Container.DIMENSION;
+                return y > 0 && y < Container.Y_DIMENSION - 2 && x >= 0 && x < Container.X_DIMENSION;
             case SECOND:
-                return y >= 0 && y < Container.DIMENSION && x > 0 && x < Container.DIMENSION - 2;
+                return y >= 0 && y < Container.Y_DIMENSION && x > 0 && x < Container.X_DIMENSION - 2;
         }
         return false;
     }

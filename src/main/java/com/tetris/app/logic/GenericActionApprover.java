@@ -20,7 +20,7 @@ public class GenericActionApprover {
     }
 
     protected boolean validPoint(int i, int j) {
-        if (i >= 0 && i < Container.DIMENSION && j>=0 && j < Container.DIMENSION) {
+        if (i >= 0 && i < Container.Y_DIMENSION && j>=0 && j < Container.X_DIMENSION) {
             Block[][] state = container.getCurrentState();
             return state[i][j] == null;
         }

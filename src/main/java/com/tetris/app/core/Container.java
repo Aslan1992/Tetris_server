@@ -8,13 +8,15 @@ import java.util.List;
 
 public class Container {
 
-    public final static int DIMENSION = 10;
+    public final static int Y_DIMENSION = 16;
+    public final static int X_DIMENSION = 10;
+
     private List<Figure> figures;
     private Block[][] currentState;
 
     public Container() {
         figures = new ArrayList<>();
-        currentState = new Block[DIMENSION][DIMENSION];
+        currentState = new Block[Y_DIMENSION][X_DIMENSION];
     }
 
     public void addFigure(Figure figure) {
@@ -35,12 +37,12 @@ public class Container {
     }
 
     public String[][] getStateAsStringArray() {
-        String[][] result = new String[DIMENSION][DIMENSION];
-        for (int i = 0; i < DIMENSION; i++) {
-            for (int j = 0; j < DIMENSION; j++) {
+        String[][] result = new String[Y_DIMENSION][X_DIMENSION];
+        for (int i = 0; i < Y_DIMENSION; i++) {
+            for (int j = 0; j < X_DIMENSION; j++) {
                 if (j == 0) {
                     result[i][j] = currentState[i][j] == null ? "|  " : "|*|";
-                } else if (j == DIMENSION - 1) {
+                } else if (j == X_DIMENSION - 1) {
                     result[i][j] = currentState[i][j] == null ? "  |" : "|*|";
                 } else {
                     result[i][j] = currentState[i][j] == null ? "   " : "|*|";
@@ -53,7 +55,7 @@ public class Container {
 
     public int removeFullFilledLines() {
         int removed = 0;
-        for (int i = 0; i < DIMENSION; i++) {
+        for (int i = 0; i < Y_DIMENSION; i++) {
             if (removeLine(i)) {
                 dropBlocksAboveLine(i);
                 removed++;
@@ -64,8 +66,8 @@ public class Container {
     }
 
     private boolean removeLine(int line) {
-        if (countBlocksAtLine(line) == DIMENSION) {
-            for (int j = 0; j < DIMENSION; j++) {
+        if (countBlocksAtLine(line) == X_DIMENSION) {
+            for (int j = 0; j < X_DIMENSION; j++) {
                 removeBlocksAt(line, j);
             }
             return true;
@@ -83,7 +85,7 @@ public class Container {
 
     private int countBlocksAtLine(int line) {
         int count = 0;
-        for (int j = 0; j < DIMENSION; j++) {
+        for (int j = 0; j < X_DIMENSION; j++) {
             if (currentState[line][j] != null) {
                 count++;
             }
@@ -94,8 +96,8 @@ public class Container {
     public void print() {
         String[][] state = getStateAsStringArray();
         System.out.println("-----^-----");
-        for (int i = 0; i < DIMENSION; i++) {
-            for (int j = 0; j < DIMENSION; j++) {
+        for (int i = 0; i < Y_DIMENSION; i++) {
+            for (int j = 0; j < X_DIMENSION; j++) {
                 System.out.print(state[i][j]);
             }
             System.out.println();
@@ -103,8 +105,8 @@ public class Container {
     }
 
     private void clear() {
-        for (int i = 0; i < DIMENSION; i++) {
-            for (int j = 0; j < DIMENSION; j++) {
+        for (int i = 0; i < Y_DIMENSION; i++) {
+            for (int j = 0; j < X_DIMENSION; j++) {
                 currentState[i][j] = null;
             }
         }

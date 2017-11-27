@@ -1,6 +1,5 @@
 package com.tetris.app;
 
-import com.tetris.app.util.Encoder;
 import org.junit.Test;
 
 public class EncoderTest {
@@ -8,19 +7,19 @@ public class EncoderTest {
     @Test
     public void t() {
 
-        String[][] a = new String[10][10];
-        Encoder encoder = new Encoder();
-
-        fillRandom(a);
-        print(a);
-
-        String line = encoder.encode(a);
-
-        System.out.println("-------Encoded array----------");
-        System.out.println(line);
-
-        String[][] arr = encoder.decode(line);
-        print(arr);
+//        String[][] a = new String[10][10];
+//        Encoder encoder = new Encoder();
+//
+//        fillRandom(a);
+//        print(a);
+//
+//        String line = encoder.encode(a);
+//
+//        System.out.println("-------Encoded array----------");
+//        System.out.println(line);
+//
+//        String[][] arr = encoder.decode(line);
+//        print(arr);
     }
 
     private void print(String[][] a) {

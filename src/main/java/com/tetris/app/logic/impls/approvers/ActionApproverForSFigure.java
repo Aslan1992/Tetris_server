@@ -37,7 +37,7 @@ public class ActionApproverForSFigure extends GenericActionApprover implements A
     @Override
     public boolean figureInsideOfArea() {
         setYX(figure);
-        return y >= 0 && y < Container.DIMENSION - 2 && x >= 0 && x < Container.DIMENSION - 2;
+        return y >= 0 && y < Container.Y_DIMENSION - 2 && x >= 0 && x < Container.X_DIMENSION - 2;
     }
 
     @Override

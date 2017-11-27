@@ -79,13 +79,13 @@ public class ActionApproverForTFigure extends GenericActionApprover implements A
         setYX(figure);
         switch (figure.getSpacePose()) {
             case FIRST:
-                return y > 0 && y < Container.DIMENSION && x > 0 && x < Container.DIMENSION - 1;
+                return y > 0 && y < Container.Y_DIMENSION && x > 0 && x < Container.X_DIMENSION - 1;
             case SECOND:
-                return y > 0 && y < Container.DIMENSION - 1 && x > 0 && x < Container.DIMENSION;
+                return y > 0 && y < Container.Y_DIMENSION - 1 && x > 0 && x < Container.X_DIMENSION;
             case THIRD:
-                return y >= 0 && y < Container.DIMENSION - 1 && x > 0 && x < Container.DIMENSION - 1;
+                return y >= 0 && y < Container.Y_DIMENSION - 1 && x > 0 && x < Container.X_DIMENSION - 1;
             case FOURTH:
-                return y > 0 && y < Container.DIMENSION - 1 && x >= 0 && x < Container.DIMENSION - 1;
+                return y > 0 && y < Container.Y_DIMENSION - 1 && x >= 0 && x < Container.X_DIMENSION - 1;
         }
         return false;
     }
